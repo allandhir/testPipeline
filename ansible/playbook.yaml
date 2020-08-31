@@ -1,0 +1,25 @@
+- hosts: localhost
+  connection: local
+
+  tasks:
+  - name: Deployment
+    k8s:
+      state: present
+      kubeconfig: "/tmp/config"
+      definition: "{{ lookup('template', './templates/test-deployment.yaml') }}"
+      validate_certs: no
+      namespace: default
+      validate:
+        fail_on_error: yes
+
+  - name: Ingress
+    k8s:
+      state: present
+      kubeconfig: "/tmp/config"
+      src: ./templates/test-ingress
+      validate_certs: no
+      namespace: default
+      validate:
+        fail_on_error: yes
+      
+

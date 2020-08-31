@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-deployment
+  namespace: default
+  labels:
+    app: test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: test
+  template:
+    metadata:
+      labels:
+        app: test
+    spec:
+      restartPolicy: Always
+      containers:
+      - name: test-container
+        image: "{{ image }}"
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 100m
+          requests:
+            cpu: 20m
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-service
+  namespace: default
+  labels:
+    app: test  
+spec:
+  selector:
+    app: test
+  type: NodePort
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80

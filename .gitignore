@@ -1,0 +1,11 @@
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/tfstate
+terraform/test-sa.json
+terraform/cicd-sa.json
+terraform/.terraform
+
+terraform/gke/gke
+terraform/terraform.tfstate.backup
+terraform/terraform.tfstate
+terraform/gke/.terraform
